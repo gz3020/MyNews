@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             android:padding="16dp">
+
+    <RelativeLayout android:id="@+id/item_video_rlyt_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/item_video_iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher"
+        />
+
+        <Button
+            android:id="@+id/item_video_btn_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="play"
+
+        />
+
+    </RelativeLayout>
+
+    <VideoView
+        android:id="@+id/item_video_vv_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+
+</FrameLayout>
