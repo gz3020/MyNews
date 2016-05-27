@@ -6,3 +6,4 @@
 
 ![news-list](MyNews/screenshots/news-save-state.gif)
 
+
