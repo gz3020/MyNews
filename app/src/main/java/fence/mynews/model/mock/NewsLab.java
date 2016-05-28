@@ -1,6 +1,6 @@
 package fence.mynews.model.mock;
 
-import com.google.gson.Gson;
+import org.litepal.crud.DataSupport;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import fence.mynews.model.entity.News;
-import fence.mynews.model.entity.VideoResp;
-import fence.mynews.ui.util.FileUtil;
 
 /**
  * @author fence
@@ -19,7 +17,13 @@ import fence.mynews.ui.util.FileUtil;
  */
 public class NewsLab {
 
-    public static List<News> getNewsList(String channelName) {
+    /**
+     * 从服务器获取新闻
+     *
+     * @param channelName 栏目名
+     * @return
+     */
+    public static List<News> getNewsesFromServer(String channelName) {
         List<News> newses = new ArrayList<>();
 
         short pageSize = 15;
@@ -38,9 +42,32 @@ public class NewsLab {
         return newses;
     }
 
-    public static List<VideoResp.VideoListEntity> getVideoList() {
-        String videoJson = FileUtil.getAssetsBy("videos");
-        VideoResp video = new Gson().fromJson(videoJson, VideoResp.class);
-        return video.getVideoList();
+    /**
+     * 从数据库获取所有新闻
+     *
+     * @param channelName 栏目名
+     * @return
+     */
+    public static List<News> getAllNewsesFromDB(String channelName) {
+        return DataSupport
+                .where("channel = ?", channelName)
+                .find(News.class);
     }
+
+    /**
+     * 从数据库分页获取新闻
+     *
+     * @param channelName 栏目名
+     * @param page 页码
+     * @param limit 每页数量
+     * @return
+     */
+    public static List<News> getNewsesFromDB(String channelName, int page, int limit) {
+        return DataSupport
+                .where("channel = ?", channelName)
+                .limit(limit)
+                .offset(limit * (page -1))
+                .find(News.class);
+    }
+
 }

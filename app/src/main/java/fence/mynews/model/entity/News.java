@@ -1,9 +1,8 @@
 package fence.mynews.model.entity;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.litepal.crud.DataSupport;
+
+import java.io.Serializable;
 
 /**
  * @author fence
@@ -11,19 +10,13 @@ import org.litepal.crud.DataSupport;
  * @description
  * @date 5/12/16
  */
-public class News extends DataSupport implements Parcelable {
+public class News extends DataSupport implements Serializable {
 
     private int id;
     private String title;
     private String time;
     private String channel;
     private long addon;
-
-    public News() {}
-
-    protected News(Parcel in) {
-        title = in.readString();
-    }
 
     public int getId() {
         return id;
@@ -65,26 +58,4 @@ public class News extends DataSupport implements Parcelable {
         this.addon = addon;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(title);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<News> CREATOR = new Creator<News>() {
-
-        @Override
-        public News createFromParcel(Parcel in) {
-            return new News(in);
-        }
-
-        @Override
-        public News[] newArray(int size) {
-            return new News[size];
-        }
-    };
 }
